@@ -1,5 +1,5 @@
 <tbody>
-<tr *ngFor="let order of userList$ | async">
-  <td>{{ order.payload.doc.data().name }}</td>
+<tr *ngFor="let userDoc of userDocs$ | async">
+  <td>{{ userDoc.data().name }}</td>
 </tr>
 </tbody>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService, User } from "../../services/firebase.service";
 import { Observable } from "rxjs";
-import { DocumentChangeAction } from "@angular/fire/firestore";
+import { QueryDocumentSnapshot } from "@angular/fire/firestore";
 
 @Component({
   selector: 'app-user-list',
@@ -10,12 +10,12 @@ import { DocumentChangeAction } from "@angular/fire/firestore";
 })
 export class UserListComponent implements OnInit {
 
-  userList$: Observable<DocumentChangeAction<User>[]>;
+  userDocs$: Observable<QueryDocumentSnapshot<User>[]>;
 
   constructor(private firebaseService: FirebaseService) { }
 
   ngOnInit() {
-    this.userList$ = this.firebaseService.getUserList$()
+    this.userDocs$ = this.firebaseService.getUserList$()
   }
 
 }
