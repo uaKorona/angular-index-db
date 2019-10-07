@@ -3,19 +3,39 @@ import { FirebaseService, User } from "../../services/firebase.service";
 import { Observable } from "rxjs";
 import { QueryDocumentSnapshot } from "@angular/fire/firestore";
 
-@Component({
-  selector: 'app-user-list',
-  templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.scss']
-})
+@Component( {
+    selector: 'app-user-list',
+    templateUrl: './user-list.component.html',
+    styleUrls: [ './user-list.component.scss' ]
+} )
 export class UserListComponent implements OnInit {
 
-  userDocs$: Observable<QueryDocumentSnapshot<User>[]>;
+    selectedUserId: string = null;
 
-  constructor(private firebaseService: FirebaseService) { }
+    userDocs$: Observable<QueryDocumentSnapshot<User>[]>;
 
-  ngOnInit() {
-    this.userDocs$ = this.firebaseService.getUserList$()
-  }
+    constructor( private firebaseService: FirebaseService ) {
+    }
+
+    ngOnInit() {
+        this.userDocs$ = this.firebaseService.getUserList$()
+    }
+
+    selectUser( selectedUserId: string ): void {
+        if (!selectedUserId) {
+            return;
+        }
+
+        if (selectedUserId === this.selectedUserId) {
+            this.resetSelectedUserId();
+            return;
+        }
+
+        this.selectedUserId = selectedUserId
+    }
+
+    private resetSelectedUserId(): void {
+        this.selectedUserId = null;
+    }
 
 }

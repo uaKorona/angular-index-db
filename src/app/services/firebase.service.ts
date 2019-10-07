@@ -16,7 +16,7 @@ export class FirebaseService {
     private usersCollection = 'coffeeUsers';
 
     constructor( private firestore: AngularFirestore ) {
-        this.createUser({name: 'Ivan', email: 'ivan@gmail.com'});
+        //this.createUser({name: 'Ivan', email: 'ivan@gmail.com'});
     }
 
     createUser( data: User ): Promise<DocumentReference> {
@@ -34,7 +34,9 @@ export class FirebaseService {
             .collection<User>(this.usersCollection)
             .snapshotChanges()
             .pipe(map((docs: DocumentChangeAction<User>[]) => {
-                return docs.map(doc => doc.payload.doc)
+                return docs.map(doc => {
+                    return doc.payload.doc
+                })
             }));
     }
 }
