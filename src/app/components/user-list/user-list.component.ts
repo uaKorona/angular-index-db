@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseService, User } from "../../services/firebase.service";
-import { Observable } from "rxjs";
-import { QueryDocumentSnapshot } from "@angular/fire/firestore";
+import { FirebaseService, User } from '../../services/firebase.service';
+import { Observable } from 'rxjs';
+import { QueryDocumentSnapshot } from '@angular/fire/firestore';
 
 @Component( {
     selector: 'app-user-list',
@@ -18,7 +18,7 @@ export class UserListComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.userDocs$ = this.firebaseService.getUserList$()
+        this.userDocs$ = this.firebaseService.getUserList$();
     }
 
     selectUser( selectedUserId: string ): void {
@@ -31,7 +31,11 @@ export class UserListComponent implements OnInit {
             return;
         }
 
-        this.selectedUserId = selectedUserId
+        this.selectedUserId = selectedUserId;
+    }
+
+    trackByUserId(index: number, item: QueryDocumentSnapshot<User>): string {
+        return item.id;
     }
 
     private resetSelectedUserId(): void {
