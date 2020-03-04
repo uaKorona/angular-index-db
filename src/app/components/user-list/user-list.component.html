@@ -1,17 +1,7 @@
-<app-user-edit></app-user-edit>
-
 <div class="row" *ngFor="let userDoc of userDocs$ | async; trackBy: trackByUserId"
      (click)="selectUser(userDoc.id)"
      [ngClass]="{'selected': selectedUserId === userDoc.id}">
 
-    <div class="col s6">
-        {{ userDoc.data().name }}
-    </div>
-    <div class="col s6">
-        <div class="input-field inline">
-            <input [id]="userDoc.id" type="email" class="validate">
-            <label [for]="userDoc.id">Email</label>
-        </div>
-<!--        {{userDoc.data().email}}-->
-    </div>
+    <app-user-edit [user]="userDoc.data()" [userId]="userDoc.id"></app-user-edit>
+
 </div>

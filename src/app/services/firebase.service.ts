@@ -1,22 +1,17 @@
-import {
-    AngularFirestore,
-    DocumentReference,
-    DocumentChangeAction,
-    QueryDocumentSnapshot, DocumentChange
-} from "@angular/fire/firestore";
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
+import { AngularFirestore, DocumentReference, DocumentChangeAction, QueryDocumentSnapshot } from '@angular/fire/firestore';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable( {
-    providedIn: "root"
+    providedIn: 'root'
 } )
 export class FirebaseService {
 
     private usersCollection = 'coffeeUsers';
 
     constructor( private firestore: AngularFirestore ) {
-        //this.createUser({name: 'Ivan', email: 'ivan@gmail.com'});
+        // this.createUser({name: 'Ivan', email: 'ivan@gmail.com'});
     }
 
     createUser( data: User ): Promise<DocumentReference> {
@@ -26,7 +21,7 @@ export class FirebaseService {
             .catch(err => {
                 console.log( err );
                 return err;
-            })
+            });
     }
 
     getUserList$(): Observable<QueryDocumentSnapshot<User>[]> {
@@ -35,8 +30,8 @@ export class FirebaseService {
             .snapshotChanges()
             .pipe(map((docs: DocumentChangeAction<User>[]) => {
                 return docs.map(doc => {
-                    return doc.payload.doc
-                })
+                    return doc.payload.doc;
+                });
             }));
     }
 }

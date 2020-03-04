@@ -1,1 +1,12 @@
-<p>user-edit works!</p>
+<div [formGroup]="userEditForm">
+    <div class="col s6">
+        {{ user.name }}
+    </div>
+    <div class="col s6">
+        <div class="input-field inline">
+            <input formControlName="email" [id]="userId" type="email" class="validate">
+            <label class="active" [for]="userId">Email</label>
+        </div>
+        <!--        {{user.email}}-->
+    </div>
+</div>
